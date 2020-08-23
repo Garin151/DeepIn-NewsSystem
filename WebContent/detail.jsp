@@ -31,8 +31,8 @@
  	.authorBox {width: 250px;height: 50px;position: absolute;top: 170px;right: 10px;}
  	.content {width:90%;font-size: 22px;white-space: pre-wrap;display: block;position: absolute;top: 670px;}
  	.detailBox {width:1200px;min-height: 877px;height: auto;left:200px;background-color: #FFFFFF;display: flex;align-items:center;flex-direction:column;position: absolute;overflow-x: hidden; overflow-y: auto;}
- 	.commentBox {width: 450px;height: 840px;background-color: #D7D7D7;position: absolute;right: 34px;top: 20px;border-radius: 12px;display: flex;justify-content:center;align-items:center;}
- 	.comList {position: absolute;top: 10px;font-size: 22px;font-weight: bold;left: 180px;}
+ 	.commentBox {width: 450px;height: 840px;background-color: #000000;position: absolute;right: 34px;top: 20px;border-radius: 12px;display: flex;justify-content:center;align-items:center;}
+ 	.comList {position: absolute;top: 10px;font-size: 22px;font-weight: bold;left: 180px;color: #FFFFFF;}
  	.containComment {width: 95%;height: 82%;background-color: #FFFFFF;border-radius: 12px;position: absolute;top: 50px;overflow-x: hidden; overflow-y: auto;}
  	.containComment::-webkit-scrollbar {width : 10px;height: 1px;}
  	.containComment::-webkit-scrollbar-thumb {border-radius: 10px;box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);background: #535353;}
@@ -116,7 +116,7 @@
 				<div class="input-group mb-3">
 			  	<input type="text" class="form-control" style="height: 50px;" placeholder="发表看法……" aria-describedby="basic-addon2">
 			  	<div class="input-group-append">
-			    	<button class="btn btn-dark" type="button">评论</button>
+			    	<button class="btn btn-danger" type="button">评论</button>
 			  	</div>
 			</div>
 			</div>

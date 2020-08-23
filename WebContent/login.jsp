@@ -147,7 +147,7 @@
 						<div class="form-group row">
 						  <label for="inputEmail3" class="col-sm-2 col-form-label">答案：</label>
 						  <div class="col-sm-10">
-						    <input type="text" class="form-control" id="inputAnswer">
+						    <input type="text" class="form-control" id="inputAnswer" placeholder="请务必牢记问题答案！">
 						  </div>
 						</div>
 						<div>

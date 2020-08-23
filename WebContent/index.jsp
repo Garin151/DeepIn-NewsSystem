@@ -30,7 +30,7 @@
  	.body_left::-webkit-scrollbar {width : 10px;height: 1px;}
 	.body_left::-webkit-scrollbar-thumb {border-radius: 10px;box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);background: #535353;}
 	.body_left::-webkit-scrollbar-track {box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);border-radius: 10px;background: #ededed;}
- 	.body_right {height: 100%;flex: 40;background-color: #F2F2F2;display: flex;flex-wrap:wrap;justify-content:space-around;align-items:flex-start;overflow-x: hidden; overflow-y: auto;}
+ 	.body_right {padding-top: 60px;height: 100%;flex: 40;background-color: #F2F2F2;display: flex;flex-wrap:wrap;justify-content:space-around;align-items:flex-start;overflow-x: hidden; overflow-y: auto;}
  	.body_right::-webkit-scrollbar {width : 10px;height: 1px;}
 	.body_right::-webkit-scrollbar-thumb {border-radius: 10px;box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);background: #535353;}
 	.body_right::-webkit-scrollbar-track {box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);border-radius: 10px;background: #ededed;}
@@ -40,7 +40,7 @@
  	.balckline {width: 100%;height: 10px;display: flex;top: 200px;position: absolute;justify-content:center;align-items:center;}
  	.authorBox {width: 250px;height: 50px;position: absolute;top: 170px;right: 10px;}
  	.content {width:90%;font-size: 22px;white-space: pre-wrap;display: block;position: absolute;top: 670px;}
- 	.newItem {transition: all 0.2s;width: 310px;height: 360px;box-shadow: 6px 6px 10px #AAAAAA;background-color: #9B9B9B;border-radius: 8px;margin-top: 40px;}
+ 	.newItem {z-index:9999;transition: all 0.2s;width: 310px;height: 360px;box-shadow: 6px 6px 10px #AAAAAA;background-color: #9B9B9B;border-radius: 8px;margin-top: 40px;}
  	.newItem:HOVER {transform: scale(1.05);color: #FF3535;box-shadow: 10px 10px 20px #AAAAAA;}
  	.itemTop {width: 100%;height: 60%;background-color: #9B9B9B;border-radius: 8px 8px 0px 0px;}
  	.itemBottom {width: 100%;height: 40%;border-top: #000000 solid 4px;background-color: #F1F1F1;border-radius: 0px 0px 8px 8px;position: relative;}
@@ -48,7 +48,7 @@
  	.itemTitle {margin-right: 5px;widht:100%;position: absolute;top: 20px;left: 10px;font-size: 20px;font-weight: bold;overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical}
  	.iconView {position: absolute;bottom: 10px;right: 60px;font-size: 20px;color: #AAAAAA;}
  	.numView {position: absolute;bottom: 1px;right: 35px;font-size: 20px;line-height:20px;color: #AAAAAA;}
- 	
+ 	.recomment {position: absolute;top: 70px;font-size: 50px;font-weight: bold;color: #E14040;}
  </style>
  
  <script type="text/javascript">
@@ -101,6 +101,7 @@
 			</p>
 		</div>
 		<div class="body_right">
+			<p class="recomment">NEWS - RECOMMEND</p>
 			<%
 				for(int i = 0;i < 5;i++) {
 			%>
