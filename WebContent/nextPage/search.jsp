@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>发布新闻</title>
- <link rel="stylesheet" type="text/css" href="iconfont/iconfont.css">
+<title>搜索页面</title>
+ <link rel="stylesheet" type="text/css" href="../iconfont/iconfont.css">
  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
@@ -20,13 +20,18 @@
 	.icon_03:HOVER {transform: scale(1.2);color: #A70000;text-shadow: 0px 0px 20px #FFFFFF;}
 	.indexTitle {font-size: 30px;letter-spacing: 12px;font-family: "华文新魏";color: #FFFFFF;position: absolute;right: 40px;}
  	.serchBar {width: 300px;height: 40px;position: absolute;left: 340px;}
- 	.sendWholeBox {width: 100%;min-height: 877px;height: auto;display: flex;justify-content:center;align-items:center;position: relative;}
- 	.sendBox {width: 55%;min-height: 855px;height:auto;background-color: #F2F2F2;top: 70px;display: flex;flex-direction:column;align-items:center;position: relative;overflow-x: hidden;overflow-y: scroll;}
- 	.sendTitle {width: 700px;height: 60px;position: absolute;top: 60px;}
- 	.addImg {width: 700px;height: 300px;background-color: #FFFFFF;position: relative;top: 214px;display: flex;justify-content:center;align-items:center;}
- 	.textIputarea {width: 700px;min-height: 500px;height: auto;position: absolute;top: 600px;margin-bottom: 100px;}
- 	.sBtn_01 {position: absolute;bottom: -300px;right: 280px;}
- 	.sBtn_02 {position: absolute;bottom: -300px;right: 170px;}
+ 	.searchComtain {width: 100%;min-height: 877px;height: auto;}
+ 	.BBox {width: 70%;padding-top: 40px;min-height: 837px;height:auto;background-color: #F2F2F2;position: relative;top: 40px;display: flex;flex-wrap:wrap;justify-content:space-around;align-items:flex-start;}
+ 	.newItem {margin: 40px 20px;transition: all 0.2s;width: 310px;height: 360px;box-shadow: 6px 6px 10px #AAAAAA;background-color: #9B9B9B;border-radius: 8px;margin-top: 40px;}
+ 	.newItem:HOVER {transform: scale(1.05);color: #FF3535;box-shadow: 10px 10px 20px #AAAAAA;}
+ 	.itemTop {width: 100%;height: 60%;background-color: #9B9B9B;border-radius: 8px 8px 0px 0px;}
+ 	.itemBottom {width: 100%;height: 40%;border-top: #000000 solid 4px;background-color: #F1F1F1;border-radius: 0px 0px 8px 8px;position: relative;}
+ 	.itemImg {width: 100%;height: 100%;object-fit: cover;border-radius: 8px 8px 0px 0px;}
+ 	.itemTitle {margin-right: 5px;widht:100%;position: absolute;top: 20px;left: 10px;font-size: 20px;font-weight: bold;overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical}
+ 	.iconView {position: absolute;bottom: 10px;right: 60px;font-size: 20px;color: #AAAAAA;}
+ 	.numView {position: absolute;bottom: 1px;right: 35px;font-size: 20px;line-height:20px;color: #AAAAAA;}
+ 	.hjk {font-size: 26px;position: absolute;top: 20px;font-weight: bold;}
+ 	
  	
  </style>
  
@@ -52,28 +57,26 @@
 		</div>
 		<p class="indexTitle">深度新闻网</p>
 	</div>
-	<div class="sendWholeBox" align="center">
-		<div class="sendBox">
-			<div class="sendTitle">
-				<div class="input-group mb-3">
-				    <div class="input-group-prepend">
-				      	<span class="input-group-text" style="height: 60px;font-size:24px;font-weight: bold;">新闻标题：</span>
-				    </div>
-				    <input type="text" class="form-control" style="height: 60px;font-size:24px;">
+	<div style="width: 100%;height: 60px;"></div>
+	<div class="searchComtain" align="center">
+		<div class="BBox">
+			<p class="hjk">搜索结果</p>
+			<%
+				for(int i = 0;i < 9;i++) {
+			%>
+				<div class="newItem">
+					<div class="itemTop">
+						<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598106779628&di=be1d5ff13a18da5770318272601b8737&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201611%2F12%2F20161112002524_dAyWP.jpeg" class="itemImg">
+					</div>
+					<div class="itemBottom">
+						<p class="itemTitle">中国动漫文娱产业升级，资本投资热度上涨</p>
+						<i class="iconfont iconxingzhuang iconView"></i>
+						<p class="numView">12</p>
+					</div>
 				</div>
-			</div>
-			<button class="btn btn-outline-dark" style="position: absolute;top: 150px;">+新闻封面</button>
-			<div class="addImg">
-				<img src="" style="width: 100%;height: 100%;object-fit: cover;position: absolute;">
-			</div>
-			<div class="input-group mb-3">
-			    <div class="input-group-prepend" style="position: absolute;top: 240px;left: 173px;">
-			      	<span class="input-group-text" style="height: 60px;font-size:24px;font-weight: bold;">新闻正文：</span>
-			    </div>
-			</div>
-			<textarea class="textIputarea" style="font-size: 20px;padding: 10px 10px;"></textarea>
-			<button class="btn btn-outline-dark sBtn_01">发布</button>
-			<button class="btn btn-outline-danger sBtn_02">取消</button>
+			<%
+				}
+			%>
 		</div>
 	</div>
 </body>

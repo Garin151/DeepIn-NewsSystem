@@ -11,10 +11,10 @@
  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
  
  <style type="text/css">
- 	a:link {color: #AAAAAA;text-decoration:none;} /* 未被访问的链接 蓝色 */
-	a:visited {color: #AAAAAA;text-decoration:none;} /* 已被访问过的链接 蓝色 */
-	a:hover {color: #DC3545;text-decoration:none;} /* 鼠标悬浮在上的链接 蓝色 */
-	a:active {color: #DC3545;text-decoration:none;} /* 鼠标点中激活链接 蓝色 */
+ 	a:link {color: #AAAAAA;text-decoration:none;} /* 未被访问的链接 */
+	a:visited {color: #AAAAAA;text-decoration:none;} /* 已被访问过的链接*/
+	a:hover {color: #DC3545;text-decoration:none;} /* 鼠标悬浮在上的链接 */
+	a:active {color: #DC3545;text-decoration:none;} /* 鼠标点中激活链接 */
  	.wholeBox {width: 100%;height: 937px;position: relative;display: flex;}
  	.leftBox {height: 100%;flex:35;background-color: #FFFFFF;position: relative;display: flex;justify-content:center;}
  	.rightBox {height: 100%;flex:65;background-color: #3D86EF;position: relative;}
@@ -40,14 +40,6 @@
  
  <script type="text/javascript">
  	$(document).ready(function() {
- 		$("#login").click(function() {
- 			console.log("登录")
- 		});
- 		
- 		$("#register").click(function() {
- 			console.log("注册")
- 		});
- 		
  		$("#loginForm").submit(function() {
  			let b = $("#inputPassword").val();
  			let a = $("#inputUser").val();
@@ -59,7 +51,13 @@
 			}
 	 	});
  		
+ 		
  	})
+ 	
+ 	function ChangeSelect() {
+ 			let data = $("#ControlSelect option:selected").val()
+ 			console.log(data)
+ 	};
  	
  </script>
 </head>
@@ -75,17 +73,17 @@
 		        	</button>
 		      	</div>
 		      	<div class="modal-body" style="height: 200px;">
-		        	<form id="loginForm" action="" autocomplete="off" method="post" class="loginForm">
+		        	<form id="loginForm" action="login?param=login" autocomplete="off" method="post" class="loginForm">
 		        		<div class="form-group row">
 						  <label for="inputEmail3" class="col-sm-2 col-form-label">用户：</label>
 						  <div class="col-sm-10">
-						    <input type="text" class="form-control" id="inputUser">
+						    <input type="text" class="form-control" name="inputUser" id="inputUser">
 						  </div>
 						</div>
 						<div class="form-group row">
 						  <label for="inputPassword3" class="col-sm-2 col-form-label">密码：</label>
 						  <div class="col-sm-10">
-						    <input type="password" class="form-control" id="inputPassword">
+						    <input type="password" class="form-control" name="inputPassword" id="inputPassword">
 						  </div>
 						</div>
 						<div>
@@ -116,38 +114,38 @@
 		        	</button>
 		      	</div>
 		      	<div class="modal-body" style="height: 360px;">
-		        	<form id="registerForm" action="" autocomplete="off" method="post" class="registerForm">
+		        	<form id="registerForm" action="login?param=register" autocomplete="off" method="post" class="registerForm">
 		        		<div class="form-group row">
 						  <label for="inputEmail3" class="col-sm-2 col-form-label">用户：</label>
 						  <div class="col-sm-10">
-						    <input type="text" class="form-control" id="inputUser">
+						    <input type="text" class="form-control" name="inputUser" id="inputUser">
 						  </div>
 						</div>
 						<div class="form-group row">
 						  <label for="inputPassword3" class="col-sm-2 col-form-label">密码：</label>
 						  <div class="col-sm-10">
-						    <input type="password" class="form-control" id="inputPassword">
+						    <input type="password" class="form-control" name="inputPassword" id="inputPassword">
 						  </div>
 						</div>
 						<div class="form-group row">
 						  <label for="inputPassword3" style="width: 100px!important;white-space: nowrap;" class="col-sm-2 col-form-label">确认密码：</label>
 						  <div class="col-sm-10">
-						    <input type="password" class="form-control" id="inputRepassword">
+						    <input type="password" class="form-control" name="inputRepassword" id="inputRepassword">
 						  </div>
 						</div>
 						<div class="form-group row">
 							<label for="exampleFormControlSelect1" style="margin-left: 16px;">找回密码：</label>
-						    <select class="form-control" style="width: 383px!important;margin-left: 2px;" id="ControlSelect">
-						      	<option>高中暗恋对象的名字 ？</option>
-						      	<option>父亲的电话号码 ？</option>
-						      	<option>母亲的电话号码 ？</option>
-						      	<option>就读小学的名称 ？</option>
+						    <select onchange="ChangeSelect()" class="form-control" style="width: 383px!important;margin-left: 2px;" name="findBack" id="ControlSelect">
+						      	<option value="高中暗恋对象的名字">高中暗恋对象的名字 ？</option>
+						      	<option value="父亲的电话号码">父亲的电话号码 ？</option>
+						      	<option value="母亲的电话号码">母亲的电话号码 ？</option>
+						      	<option value="就读小学的名称">就读小学的名称 ？</option>
 						    </select>
 						</div>
 						<div class="form-group row">
 						  <label for="inputEmail3" class="col-sm-2 col-form-label">答案：</label>
 						  <div class="col-sm-10">
-						    <input type="text" class="form-control" id="inputAnswer" placeholder="请务必牢记问题答案！">
+						    <input type="text" class="form-control" name="inputAnswer" id="inputAnswer" placeholder="请务必牢记问题答案！">
 						  </div>
 						</div>
 						<div>
