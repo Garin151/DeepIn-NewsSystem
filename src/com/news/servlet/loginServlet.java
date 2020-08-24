@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.news.business.AdminService;
 import com.news.business.RegisterService;
 import com.news.business.userService;
 import com.news.po.User;
@@ -15,6 +16,7 @@ public class loginServlet extends HttpServlet{
 	
 	private userService userservice = new userService();
 	private RegisterService registerService = new RegisterService();
+	private AdminService adminService = new AdminService();
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,6 +29,7 @@ public class loginServlet extends HttpServlet{
 			User user = new User(inputUser, inputPassword);
 			boolean data = userservice.legal(user);
 			if(data == true) {
+				request.getSession().setAttribute("userInfo", user);
 				response.sendRedirect("nextPage/index.jsp");
 			}else {
 				response.sendRedirect("error.jsp");
@@ -39,6 +42,17 @@ public class loginServlet extends HttpServlet{
 			String inputAnswer = request.getParameter("inputAnswer");
 			registerService.registerUser(inputUser, inputPassword, findBack, inputAnswer);
 			response.sendRedirect("registerOK.jsp");
+		}else if("admin".equals(param)){
+			String inputUser = request.getParameter("inputUser");
+			String inputPassword = request.getParameter("inputPassword");
+			User admin = new User(inputUser, inputPassword);
+			boolean data = adminService.isAdmin(inputUser, inputPassword);
+			if(data == true) {
+				request.getSession().setAttribute("admin", admin);
+				response.sendRedirect("nextPage/admin.jsp");
+			}else {
+				response.sendRedirect("error.jsp");
+			}
 		}
 		
 	}

@@ -57,6 +57,16 @@
  
 </head>
 <body>
+	<%
+		//判断用户是否登录
+		Object obj = session.getAttribute("userInfo");
+		if(obj == null) {
+			response.sendRedirect("../login.jsp");
+			return;
+		}
+	
+	%>
+
 	<div class="navBar">
 		<i class="iconfont iconmine_circle_fill icon_01"></i>
 		<i class="iconfont iconapp_fill icon_02"></i>

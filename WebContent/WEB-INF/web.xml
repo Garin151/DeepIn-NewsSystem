@@ -5,10 +5,20 @@
 		<servlet-class>com.news.servlet.loginServlet</servlet-class>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>findbackServlet</servlet-name>
+		<servlet-class>com.news.servlet.findbackServlet</servlet-class>
+	</servlet>
+	
 	
 	<servlet-mapping>
 		<servlet-name>loginServlet</servlet-name>
 		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>findbackServlet</servlet-name>
+		<url-pattern>/findback</url-pattern>
 	</servlet-mapping>
 	
 	

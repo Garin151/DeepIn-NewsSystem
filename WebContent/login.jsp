@@ -51,6 +51,25 @@
 			}
 	 	});
  		
+ 		$("#registerForm").submit(function() {
+ 			let a = $("#rinputUser").val();
+ 			let b = $("#rinputPassword").val();
+ 			let c = $("#rinputRepassword").val();
+ 			let d = $("#rinputAnswer").val();
+ 			if(a == "" || b == "" || c == "" || d == "") {
+ 				alert("请填写完整注册信息")
+ 				return false;
+ 			}else {
+ 				if(b != c) {
+ 					alert("两次密码不一致")
+ 	 				return false;
+ 				}else {
+					return true;
+				}
+			}
+
+	 	});
+ 		
  		
  	})
  	
@@ -58,6 +77,35 @@
  			let data = $("#ControlSelect option:selected").val()
  			console.log(data)
  	};
+ 	
+ 	function addRegister() {
+ 		let f = document.getElementsByTagName("form")[1];
+ 		if(f.action == "http://localhost:8080/systemNews/login?param=register") {
+ 			return 0
+ 		}else {
+ 			f.action=f.action+"?param=register"
+ 		}
+ 		
+ 	}
+ 	
+ 	function addLogin() {		
+ 		let f = document.getElementsByTagName("form")[0];
+ 		if(f.action == "http://localhost:8080/systemNews/login?param=login") {
+ 			return 0
+ 		}else {
+ 			f.action=f.action+"?param=login"
+ 		}
+ 	}
+ 	
+ 	function ToadminPage() {
+ 		let f = document.getElementsByTagName("form")[0];
+ 		if(f.action == "http://localhost:8080/systemNews/login?param=admin") {
+ 			
+ 		}else {
+ 			f.action=f.action+"?param=admin"
+ 		}
+ 		document.getElementById("loginForm").submit();
+ 	}
  	
  </script>
 </head>
@@ -73,7 +121,7 @@
 		        	</button>
 		      	</div>
 		      	<div class="modal-body" style="height: 200px;">
-		        	<form id="loginForm" action="login?param=login" autocomplete="off" method="post" class="loginForm">
+		        	<form id="loginForm" action="login" autocomplete="off" method="post" class="loginForm">
 		        		<div class="form-group row">
 						  <label for="inputEmail3" class="col-sm-2 col-form-label">用户：</label>
 						  <div class="col-sm-10">
@@ -88,11 +136,11 @@
 						</div>
 						<div>
 							<div class="loginContain">
-								<button type="submit" style="padding: 6px 20px;" class="btn btn-outline-dark">登录</button>
+								<button type="submit" style="padding: 6px 20px;" class="btn btn-outline-dark" onclick="addLogin()">登录</button>
 							</div>
 						  	<div>
-						  		<a class="findback" href="https://www.baidu.com">找回密码</a>
-						  		<a class="adminPage" href="https://www.baidu.com">管理员登录</a>
+						  		<a class="findback" href="findback.jsp">找回密码</a>
+						  		<a class="adminPage" onclick="ToadminPage()">管理员登录</a>
 						  	</div>
 						</div>
 		        	</form>
@@ -114,23 +162,23 @@
 		        	</button>
 		      	</div>
 		      	<div class="modal-body" style="height: 360px;">
-		        	<form id="registerForm" action="login?param=register" autocomplete="off" method="post" class="registerForm">
+		        	<form id="registerForm" action="login" autocomplete="off" method="post" class="registerForm">
 		        		<div class="form-group row">
 						  <label for="inputEmail3" class="col-sm-2 col-form-label">用户：</label>
 						  <div class="col-sm-10">
-						    <input type="text" class="form-control" name="inputUser" id="inputUser">
+						    <input type="text" class="form-control" name="inputUser" id="rinputUser">
 						  </div>
 						</div>
 						<div class="form-group row">
 						  <label for="inputPassword3" class="col-sm-2 col-form-label">密码：</label>
 						  <div class="col-sm-10">
-						    <input type="password" class="form-control" name="inputPassword" id="inputPassword">
+						    <input type="password" class="form-control" name="inputPassword" id="rinputPassword">
 						  </div>
 						</div>
 						<div class="form-group row">
 						  <label for="inputPassword3" style="width: 100px!important;white-space: nowrap;" class="col-sm-2 col-form-label">确认密码：</label>
 						  <div class="col-sm-10">
-						    <input type="password" class="form-control" name="inputRepassword" id="inputRepassword">
+						    <input type="password" class="form-control" name="inputRepassword" id="rinputRepassword">
 						  </div>
 						</div>
 						<div class="form-group row">
@@ -145,12 +193,12 @@
 						<div class="form-group row">
 						  <label for="inputEmail3" class="col-sm-2 col-form-label">答案：</label>
 						  <div class="col-sm-10">
-						    <input type="text" class="form-control" name="inputAnswer" id="inputAnswer" placeholder="请务必牢记问题答案！">
+						    <input type="text" class="form-control" name="inputAnswer" id="rinputAnswer" placeholder="请务必牢记问题答案！">
 						  </div>
 						</div>
 						<div>
 							<div class="loginContain">
-								<button type="submit" style="padding: 6px 20px;" class="btn btn-outline-danger">注册</button>
+								<button type="submit" style="padding: 6px 20px;" class="btn btn-outline-danger" onclick="addRegister()">注册</button>
 							</div>
 						</div>
 		        	</form>
