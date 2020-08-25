@@ -73,7 +73,7 @@
 			</div>
 			<textarea class="textIputarea" style="font-size: 20px;padding: 10px 10px;"></textarea>
 			<button class="btn btn-outline-dark sBtn_01">发布</button>
-			<button class="btn btn-outline-danger sBtn_02">取消</button>
+			<button class="btn btn-outline-danger sBtn_02" onclick="javascript:history.back(-1);">取消</button>
 		</div>
 	</div>
 </body>

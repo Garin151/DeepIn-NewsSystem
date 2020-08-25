@@ -29,8 +29,8 @@ public class loginServlet extends HttpServlet{
 			User user = new User(inputUser, inputPassword);
 			boolean data = userservice.legal(user);
 			if(data == true) {
-				request.getSession().setAttribute("userInfo", user);
-				response.sendRedirect("nextPage/index.jsp");
+				request.getSession().setAttribute("user", inputUser);
+				response.sendRedirect("nextPage/newServlet?param=list");
 			}else {
 				response.sendRedirect("error.jsp");
 			}
@@ -42,6 +42,7 @@ public class loginServlet extends HttpServlet{
 			String inputAnswer = request.getParameter("inputAnswer");
 			registerService.registerUser(inputUser, inputPassword, findBack, inputAnswer);
 			response.sendRedirect("registerOK.jsp");
+			
 		}else if("admin".equals(param)){
 			String inputUser = request.getParameter("inputUser");
 			String inputPassword = request.getParameter("inputPassword");

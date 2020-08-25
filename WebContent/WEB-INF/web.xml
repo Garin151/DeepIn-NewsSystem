@@ -10,6 +10,11 @@
 		<servlet-class>com.news.servlet.findbackServlet</servlet-class>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>newServlet</servlet-name>
+		<servlet-class>com.news.servlet.newServlet</servlet-class>
+	</servlet>
+	
 	
 	<servlet-mapping>
 		<servlet-name>loginServlet</servlet-name>
@@ -19,6 +24,11 @@
 	<servlet-mapping>
 		<servlet-name>findbackServlet</servlet-name>
 		<url-pattern>/findback</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>newServlet</servlet-name>
+		<url-pattern>/nextPage/newServlet</url-pattern>
 	</servlet-mapping>
 	
 	
