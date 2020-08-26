@@ -1,6 +1,7 @@
 package com.news.po;
 
 public class News {
+	private int id;
 	private String author;
 	private String creatTime;
 	private String title;
@@ -8,7 +9,18 @@ public class News {
 	private String image;
 	private int num_view;
 	
-	
+	public News(int id,String author,String creatTime,String title,String content,String image,int num_view) {
+		super();
+		this.id = id;
+		this.author = author;
+		this.creatTime = creatTime;
+		this.title = title;
+		this.content = content;
+		this.image = image;
+		this.num_view = num_view;
+		
+	}
+
 	public News(String author,String creatTime,String title,String content,String image,int num_view) {
 		super();
 		this.author = author;
@@ -28,6 +40,14 @@ public class News {
 		this.content = content;
 		this.image = image;
 		
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public String getAuthor() {

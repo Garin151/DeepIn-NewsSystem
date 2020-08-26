@@ -35,7 +35,13 @@
  	
  </style>
  <script type="text/javascript">
- 	
+ 	function toSendPage() {
+		window.location.href = "send.jsp"
+	}
+	
+	function toIndexPage() {
+		window.location.href = "newServlet?param=list"
+	}
  </script>
 
 </head>
@@ -53,8 +59,8 @@
 	%>
 	<div class="navBar">
 		<i class="iconfont iconmine_circle_fill icon_01"></i>
-		<i class="iconfont iconapp_fill icon_02"></i>
-		<i class="iconfont iconplus_circl_fill icon_03"></i>
+		<i class="iconfont iconapp_fill icon_02" onclick="toIndexPage()"></i>
+		<i class="iconfont iconplus_circl_fill icon_03" onclick="toSendPage()"></i>
 		<div class="serchBar">
 			<div class="input-group mb-3">
 			  	<input type="text" class="form-control" placeholder="搜索热点新闻" aria-describedby="basic-addon2">

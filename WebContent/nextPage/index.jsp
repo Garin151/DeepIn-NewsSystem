@@ -1,5 +1,5 @@
 <%@page import="java.util.List"%>
-<%@page import="com.news.po.News" %>
+<%@page import="com.news.po.News"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -54,9 +54,19 @@
  </style>
  
  <script type="text/javascript">
+ 
  	function toSendPage() {
  		window.location.href = "send.jsp"
 	}
+ 	
+ 	function toIndexPage() {
+ 		window.location.href = "newServlet?param=list"
+	}
+ 	
+ 	function toDetailPage(idd) {
+ 		window.location.href = "newServlet?param=detail&id=" + idd
+	}
+ 	
  </script>
  
 </head>
@@ -69,13 +79,14 @@
 			return;
 		}
 		//获得新闻展示列表
-		List<News> newsList = (List<News>)request.getAttribute("newsList");
+		List<News> newslist = (List<News>)request.getAttribute("newsList");
+		News recommend = (News)request.getAttribute("recommend");
 	
 	%>
 
 	<div class="navBar">
 		<i class="iconfont iconmine_circle_fill icon_01"></i>
-		<i class="iconfont iconapp_fill icon_02"></i>
+		<i class="iconfont iconapp_fill icon_02" onclick="toIndexPage()"></i>
 		<i class="iconfont iconplus_circl_fill icon_03" onclick="toSendPage()"></i>
 		<div class="serchBar">
 			<div class="input-group mb-3">
@@ -93,10 +104,10 @@
 	<div class="bodyBox">
 		<div class="body_left">
 			<div class="TitleBox">
-				<p class="Title">腾讯收购百漫文化，探索动漫IP建构及产业结构转型</p>
+				<p class="Title"><%=recommend.getTitle() %></p>
 			</div>
 			<div class="authorBox">
-				<p>作者：张佳林&nbsp&nbsp2020-08-22</p>
+				<p>作者：<%=recommend.getAuthor() %>&nbsp&nbsp<%=recommend.getCreatTime() %></p>
 			</div>
 			<div class="balckline">
 				<div style="width: 90%;height: 100%;background-color: #000000;"></div>
@@ -106,24 +117,17 @@
 				<div style="width: 90%;height: 100%;background-color: #000000;"></div>
 			</div>
 			<p class="content">
-		腾讯近日将完成对百漫文化的多数股权收购，双方将推动进一步的深度合作。2019年5月，百漫获得来自腾讯的数千万元A轮投资；此次增投完成后，腾讯将会拥有百漫文化的多数股权，百漫旗下的IP孵化和运营公司将与腾讯新文创生态进一步融合，继续探索动漫IP的构建及增值。
-
-　　2016年开始，中国泛娱乐产业蓬勃发展，中国动漫产业融资额增长迅猛，大量资本涌入动漫产业，促进了行业迅猛发展。
-
-　　从细分领域来看，2019年，动漫行业融资事件多集中于动画，漫画相对较少。融资内容方面，动画内容创作和动漫IP孵化所占比例较高，分别为27.5%和17.2%。此外，动漫衍生产品也占有17.2%的较高比例。
-艾媒咨询分析师认为，《白蛇·缘起》《哪吒之魔童降世》等国产动画口碑和票房的成功，为动画电影市场注入强心针，而观众对优质动画电影的追捧也让资本方更加关注动画内容生产。于此同时，动漫衍生产品的融资事件的高比例说明动漫市场产业链下游不断完善，产业盈利模式更为多元化。
-
-　　腾讯动漫是中国头部互联网动漫平台，成立于2012年。iiMedia Research(艾媒咨询) 数据显示，2017年腾讯共投资了9家动漫企业，其中糖人动漫获得两次投资，2018年投资次数减少至5次，其中哔哩哔哩获投3.2亿美元。
+				<%=recommend.getContent() %>
 			</p>
 		</div>
 		<div class="body_right">
 			<p class="recomment">NEWS - RECOMMEND</p>
 			<%
-				for(News news:newsList) {
+				for(News news:newslist) {
 			%>
-				<div class="newItem">
+				<div class="newItem" onclick="toDetailPage(<%=news.getId() %>)">
 					<div class="itemTop">
-						<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598106779628&di=be1d5ff13a18da5770318272601b8737&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201611%2F12%2F20161112002524_dAyWP.jpeg" class="itemImg">
+						<img src="../static/news_img/<%=news.getImage() %>" class="itemImg">
 					</div>
 					<div class="itemBottom">
 						<p class="itemTitle"><%=news.getTitle() %></p>

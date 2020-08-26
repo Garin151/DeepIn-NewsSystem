@@ -15,9 +15,18 @@ public class NewsService {
 		return newsDao.findAllNews();
 	}
 	
-	public List<News> findRecommendFX() {
+	public News findRecommendFX() {
 		return newsDao.findRecommend();
 	}
+	
+	public News findFromidFX(int id) {
+		return newsDao.findID(id);
+	}
+	
+	public void deleteNewsFX(int id) {
+		newsDao.deleteNews(id);
+	}
+	
 	
 	
 }
