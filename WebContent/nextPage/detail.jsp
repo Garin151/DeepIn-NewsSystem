@@ -57,6 +57,14 @@
 		window.location.href = "newServlet?param=list"
 	}
 	
+	function sendComment() {
+		document.getElementById("commentForm").submit();
+	}
+	
+	function toProfilePage(data) {
+		window.location.href = "newServlet?param=profile&username=" + data
+	}
+	
  </script>
 
 
@@ -70,6 +78,7 @@
 			return;
 		}
 		//获得新闻展示的信息和评论
+		int newsID = (int)request.getAttribute("newsID");
 		News news = (News)request.getAttribute("newsDetail");
 		List<Comment> commentlist = (List<Comment>)request.getAttribute("commentlist");
 		
@@ -78,7 +87,7 @@
 	%>
 	
 	<div class="navBar">
-		<i class="iconfont iconmine_circle_fill icon_01"></i>
+		<i class="iconfont iconmine_circle_fill icon_01" onclick="toProfilePage('<%=user %>')"></i>
 		<i class="iconfont iconapp_fill icon_02" onclick="toIndexPage()"></i>
 		<i class="iconfont iconplus_circl_fill icon_03" onclick="toSendPage()"></i>
 		<div class="serchBar">
@@ -131,11 +140,13 @@
 				%>
 			</div>
 			<div class="sendComment">
-				<div class="input-group mb-3">
-			  	<input type="text" class="form-control" style="height: 50px;" placeholder="发表看法……" aria-describedby="basic-addon2">
-			  	<div class="input-group-append">
-			    	<button class="btn btn-danger" type="button">评论</button>
-			  	</div>
+				<form action="commentServlet?param=add&newsID=<%=newsID %>&username=<%=user %>" method="post" autocomplete="off" id="commentForm">
+					<div class="input-group mb-3">
+			  			<input type="text" name="comment" class="form-control" style="height: 50px;" placeholder="发表看法……" aria-describedby="basic-addon2">
+			  		<div class="input-group-append">
+			    		<button class="btn btn-danger" type="button" onclick="sendComment()">评论</button>
+			  		</div>
+				</form>
 			</div>
 			</div>
 		</div>

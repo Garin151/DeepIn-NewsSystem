@@ -19,6 +19,15 @@ public class User {
 		this.answer = answer;
 	}
 	
+	public User(String user,String sex,String city,String birthday,String avatarUrl) {
+		super();
+		this.user = user;
+		this.sex = sex;
+		this.city = city;
+		this.birthday = birthday;
+		this.avatarUrl = avatarUrl;
+	}
+	
 	public User(String user,String password) {
 		super();
 		this.user = user;

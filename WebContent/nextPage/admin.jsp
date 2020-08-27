@@ -42,6 +42,11 @@
 	function toIndexPage() {
 		window.location.href = "newServlet?param=list"
 	}
+	
+	function toLogin() {
+		window.location.href = "../login.jsp"
+	}
+	
  </script>
 
 </head>
@@ -58,9 +63,9 @@
 	
 	%>
 	<div class="navBar">
-		<i class="iconfont iconmine_circle_fill icon_01"></i>
-		<i class="iconfont iconapp_fill icon_02" onclick="toIndexPage()"></i>
-		<i class="iconfont iconplus_circl_fill icon_03" onclick="toSendPage()"></i>
+		<i class="iconfont iconmine_circle_fill icon_01" onclick="toLogin()"></i>
+		<i class="iconfont iconapp_fill icon_02" onclick="toLogin()"></i>
+		<i class="iconfont iconplus_circl_fill icon_03" onclick="toLogin()"></i>
 		<div class="serchBar">
 			<div class="input-group mb-3">
 			  	<input type="text" class="form-control" placeholder="搜索热点新闻" aria-describedby="basic-addon2">

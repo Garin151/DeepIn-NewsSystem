@@ -43,12 +43,27 @@
 	function toIndexPage() {
 		window.location.href = "newServlet?param=list"
 	}
+	
+	function toProfilePage(data) {
+		window.location.href = "newServlet?param=profile&username=" + data
+	}
+	
  </script>
 
 </head>
 <body>
+	<%
+		//判断用户是否登录
+		String user = (String)session.getAttribute("user");
+		if(user == null) {
+			response.sendRedirect("../login.jsp");
+			return;
+		}
+	
+	%>
+
 	<div class="navBar">
-		<i class="iconfont iconmine_circle_fill icon_01"></i>
+		<i class="iconfont iconmine_circle_fill icon_01" onclick="toProfilePage('<%=user %>')"></i>
 		<i class="iconfont iconapp_fill icon_02" onclick="toIndexPage()"></i>
 		<i class="iconfont iconplus_circl_fill icon_03" onclick="toSendPage()"></i>
 		<div class="serchBar">

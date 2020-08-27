@@ -67,6 +67,11 @@
  		window.location.href = "newServlet?param=detail&id=" + idd
 	}
  	
+ 	function toProfilePage(data) {
+ 		window.location.href = "newServlet?param=profile&username=" + data
+	}
+ 	
+ 	
  </script>
  
 </head>
@@ -85,7 +90,7 @@
 	%>
 
 	<div class="navBar">
-		<i class="iconfont iconmine_circle_fill icon_01"></i>
+		<i class="iconfont iconmine_circle_fill icon_01" onclick="toProfilePage('<%=user %>')"></i>
 		<i class="iconfont iconapp_fill icon_02" onclick="toIndexPage()"></i>
 		<i class="iconfont iconplus_circl_fill icon_03" onclick="toSendPage()"></i>
 		<div class="serchBar">

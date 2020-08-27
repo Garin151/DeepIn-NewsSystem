@@ -11,6 +11,24 @@ import com.news.po.Comment;
 import com.news.util.DB_util;
 
 public class CommentDao {
+	//新增一条评论
+	public void addComment(int fromId,String user,String comment,String creatTime) {
+		String sql = "insert into comment_db (fromId,user,comment,creatTime) values (?,?,?,?)";
+		PreparedStatement pstmt = DB_util.getPreparedStatement(sql);
+		try {
+			pstmt.setInt(1, fromId);
+			pstmt.setString(2, user);
+			pstmt.setString(3, comment);
+			pstmt.setString(4, creatTime);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			DB_util.closeDB();
+		}
+	}
+	
 	//查找所有评论
 	public List<Comment> getAllComment() {
 		String sql = "select * from comment_db order by creatTime asc";

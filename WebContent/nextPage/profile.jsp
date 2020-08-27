@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="com.news.po.News"%>
+<%@page import="com.news.po.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,10 +33,11 @@
  	.itemBottom {width: 100%;height: 40%;border-top: #000000 solid 4px;background-color: #F1F1F1;border-radius: 0px 0px 8px 8px;position: relative;}
  	.itemImg {width: 100%;height: 100%;object-fit: cover;border-radius: 8px 8px 0px 0px;}
  	.itemTitle {margin-right: 5px;widht:100%;position: absolute;top: 20px;left: 10px;font-size: 20px;font-weight: bold;overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical}
- 	.iconView {position: absolute;bottom: 10px;right: 60px;font-size: 20px;color: #AAAAAA;}
+ 	.iconView {position: absolute;bottom: 10px;right: 70px;font-size: 20px;color: #AAAAAA;}
  	.numView {position: absolute;bottom: 1px;right: 35px;font-size: 20px;line-height:20px;color: #AAAAAA;}
  	.delete {position: absolute;letter-spacing: 4px;font-weight: bold;bottom: 2px;left: 10px;font-size: 20px;line-height:20px;color: #D9001B;}
- 	
+ 	.iconn {width:90px;text-align:center;height: 40px;white-space: nowrap;font-size: 14px;margin-top: 20px;margin-left: 150px;}
+ 	.xxbtn {width:90px;text-align:center;height: 40px;white-space: nowrap;font-size: 14px;margin-top: 50px;margin-left: 150px;}
  	
  </style>
 
@@ -45,13 +49,41 @@
 	function toIndexPage() {
 		window.location.href = "newServlet?param=list"
 	}
+	
+	function toDetailPage(idd) {
+ 		window.location.href = "newServlet?param=detail&id=" + idd
+	}
+	
+	function toProfilePage(data) {
+		window.location.href = "newServlet?param=profile&username=" + data
+	}
+	
+	function logOut() {
+		window.location.href = "../login.jsp"
+	}
+	
+	
+	
 </script>
 
 
 </head>
 <body>
+	<%
+		//判断用户是否登录
+		String user = (String)session.getAttribute("user");
+		if(user == null) {
+			response.sendRedirect("../login.jsp");
+			return;
+		}
+		
+		User info = (User)request.getAttribute("userInfo");
+		List<News> newslist = (List<News>)request.getAttribute("newsList");
+
+	%>
+
 	<div class="navBar">
-		<i class="iconfont iconmine_circle_fill icon_01"></i>
+		<i class="iconfont iconmine_circle_fill icon_01" onclick="toProfilePage('<%=user %>')"></i>
 		<i class="iconfont iconapp_fill icon_02" onclick="toIndexPage()"></i>
 		<i class="iconfont iconplus_circl_fill icon_03" onclick="toSendPage()"></i>
 		<div class="serchBar">
@@ -72,24 +104,27 @@
 			<div class="info">
 				<ul class="list-group">
 				  	<li class="list-group-item active">个人主页</li>
-				  	<li class="list-group-item">用户：</li>
-				  	<li class="list-group-item">性别：</li>
-				  	<li class="list-group-item">城市：</li>
+				  	<li class="list-group-item">用户：<%=info.getUser() %></li>
+				  	<li class="list-group-item">性别：<%=info.getSex() %></li>
+				  	<li class="list-group-item">生日：<%=info.getBirthday() %></li>
+				  	<li class="list-group-item">城市：<%=info.getCity() %></li>
 				</ul>
+				<button class="btn btn-success xxbtn">修改资料</button>
+				<button class="btn btn-danger iconn" onclick="logOut()">退出登录</button>
 			</div>
 		</div>
 		<div class="body_right">
 			<%
-				for(int i = 0;i < 8;i++) {
+				for(News oneNews:newslist) {
 			%>
-				<div class="newItem">
+				<div class="newItem" onclick="toDetailPage('<%=oneNews.getId() %>')">
 					<div class="itemTop">
-						<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598106779628&di=be1d5ff13a18da5770318272601b8737&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201611%2F12%2F20161112002524_dAyWP.jpeg" class="itemImg">
+						<img src="../static/news_img/<%=oneNews.getImage() %>" class="itemImg">
 					</div>
 					<div class="itemBottom">
-						<p class="itemTitle">中国动漫文娱产业升级，资本投资热度上涨</p>
+						<p class="itemTitle"><%=oneNews.getTitle() %></p>
 						<i class="iconfont iconxingzhuang iconView"></i>
-						<p class="numView">12</p>
+						<p class="numView"><%=oneNews.getNum_view() %></p>
 						<p class="delete">删除</p>
 					</div>
 				</div>

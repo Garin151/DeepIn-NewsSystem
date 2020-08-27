@@ -218,7 +218,7 @@
 			</div>
 		</div>
 		<div class="rightBox">
-			<div id="loginSwiper" class="carousel slide r_topBox" data-pause=false data-ride="carousel" data-interval="4000">
+			<div id="loginSwiper" class="carousel slide r_topBox" data-pause=false data-ride="carousel" data-interval="3000">
 				 <div class="swiperMask"></div>
 				 <ul class="carousel-indicators control">
 				 	<li data-target="#loginSwiper" data-slide-to="0" class="active"></li>

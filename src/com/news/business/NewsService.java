@@ -27,6 +27,14 @@ public class NewsService {
 		newsDao.deleteNews(id);
 	}
 	
+	public void updateViewFX(int id) {
+		newsDao.updateView(id);
+	}
+	
+	public List<News> authorNewsFX(String username) {
+		return newsDao.authorNews(username);
+	}
+	
 	
 	
 }

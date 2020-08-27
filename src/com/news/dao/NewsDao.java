@@ -58,6 +58,23 @@ public class NewsDao {
 		}
 	}
 	
+	//新增新闻的阅读量
+	public void updateView(int id) {
+		String sql = "update news_db set num_view = num_view + 1 where id = ?";
+		PreparedStatement pstmt = DB_util.getPreparedStatement(sql);
+		try {
+			pstmt.setInt(1,id);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			DB_util.closeDB();
+		}
+	}
+	
+	
 	//新增一条新闻
 	public void addNews(String author,String creatTime,String title,String content,String image) {
 		String sql = "insert into news_db (author,creatTime,title,content,image,num_view) values (?,?,?,?,?,?)";
@@ -76,6 +93,37 @@ public class NewsDao {
 		}finally {
 			DB_util.closeDB();
 		}
+	}
+	
+	//查找同一作者的新闻
+	public List<News> authorNews(String username) {
+		List<News> newsList = new ArrayList<News>();
+		String sql = "select * from news_db where author = ? order by creatTime desc";
+		PreparedStatement pstmt = DB_util.getPreparedStatement(sql);
+		try {
+			pstmt.setString(1, username);
+			ResultSet res = pstmt.executeQuery();
+			while(res.next()) {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				int id = res.getInt("id");
+				String author = res.getString("author");
+				String creatTime = sdf.format(res.getDate("creatTime"));
+				String title = res.getString("title");
+				String image = res.getString("image");
+				String content = res.getString("content");
+				int num_view = res.getInt("num_view");
+				News oneNew = new News(id, author, creatTime, title, content, image, num_view);
+				newsList.add(oneNew);
+			}
+			res.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			DB_util.closeDB();
+		}
+		
+		return newsList;
 	}
 	
 	//查询所有新闻并按时间排序

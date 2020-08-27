@@ -1,6 +1,7 @@
 package com.news.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.news.business.AdminService;
+import com.news.business.NewsService;
 import com.news.business.RegisterService;
 import com.news.business.userService;
+import com.news.po.News;
 import com.news.po.User;
 
 public class loginServlet extends HttpServlet{
@@ -17,6 +20,7 @@ public class loginServlet extends HttpServlet{
 	private userService userservice = new userService();
 	private RegisterService registerService = new RegisterService();
 	private AdminService adminService = new AdminService();
+	private NewsService newsService = new NewsService();
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

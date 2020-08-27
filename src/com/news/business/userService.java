@@ -9,4 +9,8 @@ public class userService {
 	public boolean legal(User user) {
 		return userDao.isExists(user.getUser(),user.getPassword());
 	}
+	
+	public User getInfoFX(String username) {
+		return userDao.getInfo(username);
+	}
 }
