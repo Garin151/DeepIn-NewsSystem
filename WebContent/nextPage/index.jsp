@@ -71,6 +71,15 @@
  		window.location.href = "newServlet?param=profile&username=" + data
 	}
  	
+ 	function toSearch() {
+		let str = $("#searchNews").val();
+		if(str == "") {
+			alert("搜索不能为空！")
+		}else {
+			window.location.href = "newServlet?param=search&info=" + str
+		}
+	}
+ 	
  	
  </script>
  
@@ -95,9 +104,9 @@
 		<i class="iconfont iconplus_circl_fill icon_03" onclick="toSendPage()"></i>
 		<div class="serchBar">
 			<div class="input-group mb-3">
-			  	<input type="text" class="form-control" placeholder="搜索热点新闻" aria-describedby="basic-addon2">
+			  	<input type="text" id="searchNews" class="form-control" placeholder="搜索热点新闻" aria-describedby="basic-addon2">
 			  	<div class="input-group-append">
-			    	<button class="btn btn-outline-secondary" type="button">
+			    	<button class="btn btn-outline-secondary" type="button" onclick="toSearch()">
 			    		<i class="iconfont iconsearch" style="font-size: 16px;color: #FFFFFF;"></i>
 			    	</button>
 			  	</div>

@@ -62,7 +62,24 @@
 		window.location.href = "../login.jsp"
 	}
 	
+	function toSearch() {
+		let str = $("#searchNews").val();
+		if(str == "") {
+			alert("搜索不能为空！")
+		}else {
+			window.location.href = "newServlet?param=search&info=" + str
+		}
+	}
 	
+	function deleteNews(idd,title,username) {
+		let r=confirm("确定要删除  "+title+"  这条新闻吗？");
+		if(r==true) {
+			window.location.href = "newServlet?param=delete&page=profile&id=" + idd + "&name=" + username
+		}
+		else{
+			return 0;
+		}
+	}
 	
 </script>
 
@@ -88,9 +105,9 @@
 		<i class="iconfont iconplus_circl_fill icon_03" onclick="toSendPage()"></i>
 		<div class="serchBar">
 			<div class="input-group mb-3">
-			  	<input type="text" class="form-control" placeholder="搜索热点新闻" aria-describedby="basic-addon2">
+			  	<input type="text" id="searchNews" class="form-control" placeholder="搜索热点新闻" aria-describedby="basic-addon2">
 			  	<div class="input-group-append">
-			    	<button class="btn btn-outline-secondary" type="button">
+			    	<button class="btn btn-outline-secondary" type="button" onclick="toSearch()">
 			    		<i class="iconfont iconsearch" style="font-size: 16px;color: #FFFFFF;"></i>
 			    	</button>
 			  	</div>
@@ -125,7 +142,7 @@
 						<p class="itemTitle"><%=oneNews.getTitle() %></p>
 						<i class="iconfont iconxingzhuang iconView"></i>
 						<p class="numView"><%=oneNews.getNum_view() %></p>
-						<p class="delete">删除</p>
+						<p class="delete" onclick="deleteNews('<%=oneNews.getId() %>','<%=oneNews.getTitle() %>','<%=user %>');event.cancelBubble=true;">删除</p>
 					</div>
 				</div>
 			<%

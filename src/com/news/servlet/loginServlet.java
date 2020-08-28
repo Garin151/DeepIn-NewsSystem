@@ -1,6 +1,7 @@
 package com.news.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import com.news.business.RegisterService;
 import com.news.business.userService;
 import com.news.po.News;
 import com.news.po.User;
+import com.news.po.Show;
 
 public class loginServlet extends HttpServlet{
 	
@@ -33,10 +35,17 @@ public class loginServlet extends HttpServlet{
 			User user = new User(inputUser, inputPassword);
 			boolean data = userservice.legal(user);
 			if(data == true) {
-				request.getSession().setAttribute("user", inputUser);
-				response.sendRedirect("nextPage/newServlet?param=list");
+				boolean value = userservice.isBanFX(inputUser, inputPassword);
+				if(value == true) {
+					response.sendRedirect("ban.jsp");
+				}else {
+					request.getSession().setAttribute("user", inputUser);
+					response.sendRedirect("nextPage/newServlet?param=list");
+				}
 			}else {
-				response.sendRedirect("error.jsp");
+				String str = "’À∫≈√‹¬Î¥ÌŒÛ£°";
+				request.setAttribute("message", str);
+				request.getRequestDispatcher("error.jsp").forward(request, response);
 			}
 			
 		}else if("register".equals(param)){
@@ -53,12 +62,34 @@ public class loginServlet extends HttpServlet{
 			User admin = new User(inputUser, inputPassword);
 			boolean data = adminService.isAdmin(inputUser, inputPassword);
 			if(data == true) {
-				request.getSession().setAttribute("admin", admin);
-				response.sendRedirect("nextPage/admin.jsp");
+				request.getSession().setAttribute("admin", inputUser);
+				List<Show> showlist = userservice.getAllShowFX();
+				List<News> newslist = newsService.findAllFX();
+				request.setAttribute("showlist", showlist);
+				request.setAttribute("newslist", newslist);
+				request.getRequestDispatcher("/nextPage/admin.jsp").forward(request, response);
+				
 			}else {
-				response.sendRedirect("error.jsp");
+				String str = "’À∫≈√‹¬Î¥ÌŒÛ£°";
+				request.setAttribute("message", str);
+				request.getRequestDispatcher("error.jsp").forward(request, response);
 			}
+			
+		}else if ("control".equals(param)) {
+			String name = request.getParameter("name");
+			String data = request.getParameter("data");
+			userservice.banorActUserFX(name, data);
+			response.sendRedirect("login?param=adminOK");
+			
+		}else if ("adminOK".equals(param)) {
+			List<Show> showlist = userservice.getAllShowFX();
+			List<News> newslist = newsService.findAllFX();
+			request.setAttribute("showlist", showlist);
+			request.setAttribute("newslist", newslist);
+			request.getRequestDispatcher("/nextPage/admin.jsp").forward(request, response);
 		}
+		
+		
 		
 	}
 

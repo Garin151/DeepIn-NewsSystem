@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="com.news.po.News"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -29,7 +31,7 @@
  	.itemImg {width: 100%;height: 100%;object-fit: cover;border-radius: 8px 8px 0px 0px;}
  	.itemTitle {margin-right: 5px;widht:100%;position: absolute;top: 20px;left: 10px;font-size: 20px;font-weight: bold;overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical}
  	.iconView {position: absolute;bottom: 10px;right: 60px;font-size: 20px;color: #AAAAAA;}
- 	.numView {position: absolute;bottom: 1px;right: 35px;font-size: 20px;line-height:20px;color: #AAAAAA;}
+ 	.numView {position: absolute;bottom: 1px;right: 25px;font-size: 20px;line-height:20px;color: #AAAAAA;}
  	.hjk {font-size: 26px;position: absolute;top: 20px;font-weight: bold;}
  	
  	
@@ -44,8 +46,21 @@
 		window.location.href = "newServlet?param=list"
 	}
 	
+	function toDetailPage(idd) {
+ 		window.location.href = "newServlet?param=detail&id=" + idd
+	}
+	
 	function toProfilePage(data) {
 		window.location.href = "newServlet?param=profile&username=" + data
+	}
+	
+	function toSearch() {
+		let str = $("#searchNews").val();
+		if(str == "") {
+			alert("搜索不能为空！")
+		}else {
+			window.location.href = "newServlet?param=search&info=" + str
+		}
 	}
 	
  </script>
@@ -59,6 +74,8 @@
 			response.sendRedirect("../login.jsp");
 			return;
 		}
+		
+		List<News> newslist = (List<News>)request.getAttribute("newsList");
 	
 	%>
 
@@ -68,9 +85,9 @@
 		<i class="iconfont iconplus_circl_fill icon_03" onclick="toSendPage()"></i>
 		<div class="serchBar">
 			<div class="input-group mb-3">
-			  	<input type="text" class="form-control" placeholder="搜索热点新闻" aria-describedby="basic-addon2">
+			  	<input type="text" id="searchNews" class="form-control" placeholder="搜索热点新闻" aria-describedby="basic-addon2">
 			  	<div class="input-group-append">
-			    	<button class="btn btn-outline-secondary" type="button">
+			    	<button class="btn btn-outline-secondary" type="button" onclick="toSearch()">
 			    		<i class="iconfont iconsearch" style="font-size: 16px;color: #FFFFFF;"></i>
 			    	</button>
 			  	</div>
@@ -83,16 +100,16 @@
 		<div class="BBox">
 			<p class="hjk">搜索结果</p>
 			<%
-				for(int i = 0;i < 9;i++) {
+				for(News news:newslist) {
 			%>
-				<div class="newItem">
+				<div class="newItem" onclick="toDetailPage(<%=news.getId() %>)">
 					<div class="itemTop">
-						<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598106779628&di=be1d5ff13a18da5770318272601b8737&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201611%2F12%2F20161112002524_dAyWP.jpeg" class="itemImg">
+						<img src="../static/news_img/<%=news.getImage() %>" class="itemImg">
 					</div>
 					<div class="itemBottom">
-						<p class="itemTitle">中国动漫文娱产业升级，资本投资热度上涨</p>
+						<p class="itemTitle"><%=news.getTitle() %></p>
 						<i class="iconfont iconxingzhuang iconView"></i>
-						<p class="numView">12</p>
+						<p class="numView"><%=news.getNum_view() %></p>
 					</div>
 				</div>
 			<%

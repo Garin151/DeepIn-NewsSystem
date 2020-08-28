@@ -75,6 +75,24 @@ public class newServlet extends HttpServlet{
 			request.setAttribute("newsList", newsList);
 			request.setAttribute("userInfo", item);
 			request.getRequestDispatcher("profile.jsp").forward(request, response);
+			
+		}else if("search".equals(param)){
+			String info = request.getParameter("info");
+			List<News> newsList = newsService.searchNewsFX(info);
+			request.setAttribute("newsList", newsList);
+			request.getRequestDispatcher("search.jsp").forward(request, response);
+			
+		}else if ("delete".equals(param)) {
+			String page = request.getParameter("page");
+			int id = Integer.parseInt(request.getParameter("id"));
+			newsService.deleteNewsFX(id);
+			if("admin".equals(page)) {
+				response.sendRedirect("../login?param=adminOK");
+			}else if ("profile".equals(page)) {
+				String name = request.getParameter("name");
+				response.sendRedirect("newServlet?param=profile&username=" + name);
+			}
+			
 		}
 		
 		

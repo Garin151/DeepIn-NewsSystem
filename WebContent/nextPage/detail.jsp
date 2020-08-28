@@ -58,11 +58,25 @@
 	}
 	
 	function sendComment() {
-		document.getElementById("commentForm").submit();
+		let str = $("#comment").val();
+		if(str == "") {
+			alert("评论不能为空哦")
+		}else {
+			document.getElementById("commentForm").submit();
+		}
 	}
 	
 	function toProfilePage(data) {
 		window.location.href = "newServlet?param=profile&username=" + data
+	}
+	
+	function toSearch() {
+		let str = $("#searchNews").val();
+		if(str == "") {
+			alert("搜索不能为空！")
+		}else {
+			window.location.href = "newServlet?param=search&info=" + str
+		}
 	}
 	
  </script>
@@ -92,9 +106,9 @@
 		<i class="iconfont iconplus_circl_fill icon_03" onclick="toSendPage()"></i>
 		<div class="serchBar">
 			<div class="input-group mb-3">
-			  	<input type="text" class="form-control" placeholder="搜索热点新闻" aria-describedby="basic-addon2">
+			  	<input type="text" id="searchNews" class="form-control" placeholder="搜索热点新闻" aria-describedby="basic-addon2">
 			  	<div class="input-group-append">
-			    	<button class="btn btn-outline-secondary" type="button">
+			    	<button class="btn btn-outline-secondary" type="button" onclick="toSearch()">
 			    		<i class="iconfont iconsearch" style="font-size: 16px;color: #FFFFFF;"></i>
 			    	</button>
 			  	</div>
@@ -142,7 +156,7 @@
 			<div class="sendComment">
 				<form action="commentServlet?param=add&newsID=<%=newsID %>&username=<%=user %>" method="post" autocomplete="off" id="commentForm">
 					<div class="input-group mb-3">
-			  			<input type="text" name="comment" class="form-control" style="height: 50px;" placeholder="发表看法……" aria-describedby="basic-addon2">
+			  			<input type="text" id="comment" name="comment" class="form-control" style="height: 50px;" placeholder="发表看法……" aria-describedby="basic-addon2">
 			  		<div class="input-group-append">
 			    		<button class="btn btn-danger" type="button" onclick="sendComment()">评论</button>
 			  		</div>

@@ -53,7 +53,7 @@
 	}
 	
 	function toProfilePage(data) {
-		window.location.href = "newServlet?param=profile&username=" + data
+ 		window.location.href = "newServlet?param=profile&username=" + data
 	}
  
  	
@@ -73,19 +73,9 @@
 	%>
 
 	<div class="navBar">
-		<i class="iconfont iconmine_circle_fill icon_01" onclick="toProfilePage(<%=user %>)"></i>
+		<i class="iconfont iconmine_circle_fill icon_01" onclick="toProfilePage('<%=user %>')"></i>
 		<i class="iconfont iconapp_fill icon_02" onclick="toIndexPage()"></i>
 		<i class="iconfont iconplus_circl_fill icon_03" onclick="toSendPage()"></i>
-		<div class="serchBar">
-			<div class="input-group mb-3">
-			  	<input type="text" class="form-control" placeholder="搜索热点新闻" aria-describedby="basic-addon2">
-			  	<div class="input-group-append">
-			    	<button class="btn btn-outline-secondary" type="button">
-			    		<i class="iconfont iconsearch" style="font-size: 16px;color: #FFFFFF;"></i>
-			    	</button>
-			  	</div>
-			</div>
-		</div>
 		<p class="indexTitle">深度新闻网</p>
 	</div>
 	<div class="sendWholeBox" align="center">

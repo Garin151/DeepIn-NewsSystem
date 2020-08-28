@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="com.news.po.News"%>
+<%@page import="com.news.po.Show"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -5,7 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>管理员页面</title>
- <link rel="stylesheet" type="text/css" href="../iconfont/iconfont.css">
  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
@@ -29,23 +31,64 @@
 	.allNews::-webkit-scrollbar-thumb {border-radius: 10px;box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);background: #535353;}
 	.allNews::-webkit-scrollbar-track {box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);border-radius: 10px;background: #ededed;}
  	.oneBar {width: 95%;height: 60px;margin-top: 10px;border-radius:10px;}
- 	.xbb {width: 446px;height: 60px;}
+ 	.xbbb {width: 446px;height: 60px;display: flex;position: relative;justify-content:center;align-items:center;}
+ 	.xbb {width: 366px;height: 60px;display: flex;position: relative;justify-content:center;align-items:center;}
  	.adTitle {font-size: 30px;position: absolute;top: 0px;}
- 	
+ 	.namm {font-size: 20px;font-weight: bold;position: absolute;left: 20px;}
+ 	.status {font-size: 18px;letter-spacing: 4px;position: absolute;right: 20px;color: #6F6F6F;}
+ 	.guanliUser {position: absolute;top: 5px;font-size: 24px;font-weight: bold;letter-spacing: 6px;margin-left: 180px;}
+ 	.btnpp {position: absolute;bottom: 24px;right: 906px;}
  	
  </style>
  <script type="text/javascript">
- 	function toSendPage() {
-		window.location.href = "send.jsp"
+ 
+	function toDetailPage(idd) {
+ 		window.location.href = "nextPage/newServlet?param=detail&id=" + idd
 	}
 	
-	function toIndexPage() {
-		window.location.href = "newServlet?param=list"
+	function toBan(username,status) {
+		if(status == "已禁用") {
+			alert("账号："+username+" 已经被禁止了")
+		}else {
+			let r=confirm("确定要禁止  "+username+"  这个账号吗？");
+			if(r==true) {
+				window.location.href = "login?param=control&name=" + username +"&data=ban"
+			}
+			else{
+				return 0;
+			}
+		}
 	}
 	
-	function toLogin() {
-		window.location.href = "../login.jsp"
+	function toActive(username,status) {
+		if(status == "正常") {
+			alert("账号："+username+" 已经是激活状态")
+		}else {
+			let r=confirm("确定要开放  "+username+"  这个账号吗？");
+			if(r==true) {
+				window.location.href = "login?param=control&name=" + username +"&data=active"
+			}
+			else{
+				return 0;
+			}
+		}
+		
 	}
+	
+	function logOut() {
+		window.location.href = "login.jsp"
+	}
+	
+	function deleteNews(idd,title) {
+		let r=confirm("确定要删除  "+title+"  这条新闻吗？");
+		if(r==true) {
+			window.location.href = "nextPage/newServlet?param=delete&page=admin&id=" + idd
+		}
+		else{
+			return 0;
+		}
+	}
+	
 	
  </script>
 
@@ -55,42 +98,41 @@
 <body>
 	<%
 		//判断用户是否登录
-		Object obj = session.getAttribute("admin");
-		if(obj == null) {
+		String user = (String)session.getAttribute("admin");
+		if(user == "") {
 			response.sendRedirect("../login.jsp");
 			return;
 		}
+		
+		//获取展示信息
+		List<Show> showlist = (List<Show>)request.getAttribute("showlist");
+		List<News> newslist = (List<News>)request.getAttribute("newslist");
 	
 	%>
 	<div class="navBar">
 		<i class="iconfont iconmine_circle_fill icon_01" onclick="toLogin()"></i>
 		<i class="iconfont iconapp_fill icon_02" onclick="toLogin()"></i>
 		<i class="iconfont iconplus_circl_fill icon_03" onclick="toLogin()"></i>
-		<div class="serchBar">
-			<div class="input-group mb-3">
-			  	<input type="text" class="form-control" placeholder="搜索热点新闻" aria-describedby="basic-addon2">
-			  	<div class="input-group-append">
-			    	<button class="btn btn-outline-secondary" type="button">
-			    		<i class="iconfont iconsearch" style="font-size: 16px;color: #FFFFFF;"></i>
-			    	</button>
-			  	</div>
-			</div>
-		</div>
 		<p class="indexTitle">深度新闻网</p>
 	</div>
 	<div style="width: 100%;height: 60px;"></div>
 	<div class="allUser" align="center">
+		<p class="guanliUser">用户管理列表</p>
 		<%
-			for(int i = 0;i < 50;i++) {
+			for(Show show:showlist) {
 		%>
 		<div class="oneBar">
-			<div class="input-group mb-3" style="border-radius:12px;">
+			<div class="input-group mb-3" style="border-radius:12px;display: flex;position: relative;">
 			  	<div class="list-group-item xbb">
-			  		哈哈哈
+			  		<p class="namm"><%=show.getName() %></p>
+			  		<p class="status"><%=show.getStatus() %></p>
 			  	</div>
 			  	<div class="input-group-append">
-			    	<button class="btn btn-danger" type="button">
+			    	<button class="btn btn-danger" type="button" onclick="toBan('<%=show.getName() %>','<%=show.getStatus() %>')">
 			    		BanID
+			    	</button>
+			    	<button class="btn btn-success" type="button" onclick="toActive('<%=show.getName() %>','<%=show.getStatus() %>')">
+			    		ActID
 			    	</button>
 			  	</div>
 			</div>
@@ -100,16 +142,17 @@
 		%>
 	</div>
 	<div class="allNews" align="center">
+		<p class="guanliUser">新闻管理列表</p>
 		<%
-			for(int i = 0;i < 50;i++) {
+			for(News news:newslist) {
 		%>
 		<div class="oneBar">
 			<div class="input-group mb-3">
-			  	<div class="list-group-item xbb">
-			  		哈哈哈
+			  	<div class="list-group-item xbbb" onclick="toDetailPage('<%=news.getId() %>')">
+			  		<p class="namm"><%=news.getTitle() %></p>
 			  	</div>
 			  	<div class="input-group-append">
-			    	<button class="btn btn-warning" type="button">
+			    	<button class="btn btn-warning" type="button" onclick="deleteNews('<%=news.getId() %>','<%=news.getTitle() %>')">
 			    		删除
 			    	</button>
 			  	</div>
@@ -119,6 +162,7 @@
 			}
 		%>
 	</div>
+	<button class="btn btn-danger btnpp" onclick="logOut()">退出管理系统</button>
 
 </body>
 </html>

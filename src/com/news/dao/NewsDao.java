@@ -42,6 +42,39 @@ public class NewsDao {
 		
 	}
 	
+	public List<News> searchNews(String data) {
+		List<News> newsList = new ArrayList<News>();
+		String sql = "select * from news_db where title like '%" + data + "%' order by creatTime desc";
+		PreparedStatement pstmt = DB_util.getPreparedStatement(sql);
+		try {
+			ResultSet res = pstmt.executeQuery();
+			while(res.next()) {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				int id = res.getInt("id");
+				String author = res.getString("author");
+				String creatTime = sdf.format(res.getDate("creatTime"));
+				String title = res.getString("title");
+				String image = res.getString("image");
+				String content = res.getString("content");
+				int num_view = res.getInt("num_view");
+				News oneNew = new News(id, author, creatTime, title, content, image, num_view);
+				newsList.add(oneNew);
+			}
+			res.close();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			DB_util.closeDB();
+		}
+		
+		return newsList;
+		
+		
+	}
+	
+	
 	//根据id删除一条新闻
 	public void deleteNews(int id) {
 		String sql = "delete from news_db where id = ?";

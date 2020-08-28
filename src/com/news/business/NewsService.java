@@ -35,6 +35,9 @@ public class NewsService {
 		return newsDao.authorNews(username);
 	}
 	
+	public List<News> searchNewsFX(String data) {
+		return newsDao.searchNews(data);
+	}
 	
 	
 }
